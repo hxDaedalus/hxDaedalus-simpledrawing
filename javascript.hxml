@@ -1,0 +1,14 @@
+-lib hxDaedalus
+-cp src/
+-main Main
+-D canvasHeader=600:400:60:FFFFFF
+-js webJS/Main.js
+-D fdb
+# setting svg flag allows drawing to be done with svg.
+#-D svg
+#-D showVerticesIndices
+-debug
+#mac
+#-cmd open webJS/Main.html
+#win
+-cmd start webJS/Main.html

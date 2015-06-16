@@ -1,0 +1,19 @@
+-lib hxDaedalus
+-cp src/
+-main Main
+-java binSwing
+-D canvasHeader=600:400:60:FFFFFF
+-D windowTitle=Java Swing Simple Drawing hxDaedalus
+-D fdb
+#-D showVerticesIndices
+-debug
+-D haxe3.2
+#mac
+--next
+-cmd cd binSwing/src/
+-cmd cd ../
+# run our application
+# -cmd java -jar *.jar
+
+#win
+# not yet implemented

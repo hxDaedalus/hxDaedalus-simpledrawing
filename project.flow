@@ -1,0 +1,32 @@
+{
+	luxe:{
+		window: {
+			width:800,
+			height:600,
+			title:'Simple Drawing',
+			fullscreen:false,
+			resizable:true,
+			borderless:false
+		}
+	},
+
+	project : {
+		name : 'simpledrawing',
+		version : '0.0.4',
+		author : 'hxDaedalus',
+		app : {
+			main: 'Main',
+			name:'simpledrawing',
+			output: 'binLuxe',
+			package : 'lib.hxDaedalus.simpledrawing'
+		},
+		build : {
+			dependencies : {
+				luxe : '*',
+				hxDaedalus : '*'
+			}
+		},
+		files : {
+		}
+	}
+}
