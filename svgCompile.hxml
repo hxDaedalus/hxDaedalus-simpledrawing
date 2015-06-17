@@ -1,0 +1,25 @@
+# very similar to jsCompile
+-lib hxDaedalus
+-cp src/
+-main Main
+-D canvasHeader=600:400:60:FFFFFF
+-js webSVG/main.js
+-D fdb
+# setting svg flag allows drawing to be done with svg.
+-D svg
+#-D showVerticesIndices
+-debug
+
+--next
+-main WebJS
+-cp srcTemplates/
+-neko webSVG/webjs.n
+--next
+-cmd cd webSVG
+-cmd neko webjs.n
+-cmd rm -r webjs.n
+--next
+#mac
+#-cmd open webSVG/Main.html
+#win
+-cmd start Main.html

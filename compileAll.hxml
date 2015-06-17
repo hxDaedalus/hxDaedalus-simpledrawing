@@ -5,6 +5,8 @@
 --next
 -cmd haxe javaCompile.hxml
 --next
+-cmd haxe svgCompile.hxml
+--next
 -cmd haxe jsCompile.hxml
 --next
 -cmd haxe luxeWindowsCompile.hxml
