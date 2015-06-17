@@ -16,7 +16,7 @@ version: 0.0.3
 main: Main
 
 # The platform to use when invoking `run` or `build` with no arguments.
-default_platform: flash
+default_platform: html
 
 # The initial orientation and fullscreen state on mobile devices.
 orientation: portrait
