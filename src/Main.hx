@@ -95,13 +95,6 @@ import TestGraphics;
         #end
     }
 
-    #if java
-    /*public function paintFunction( g_: java.awt.Graphics2D ){
-        g.graphics = g_;
-        testGraphic.render();
-    }*/
-    #end
-
     #if( flash || nme || openfl )
     function onKeyDown(event:KeyboardEvent):Void
     {
