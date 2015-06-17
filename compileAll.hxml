@@ -1,0 +1,12 @@
+# flambe has errors!!
+#-cmd haxe flambeHtml5Compile.hxml
+--next
+-cmd haxe nmeWindowsCompile.hxml
+--next
+-cmd haxe javaCompile.hxml
+--next
+-cmd haxe jsCompile.hxml
+--next
+-cmd haxe luxeWindowsCompile.hxml
+--next
+-cmd haxe luxeHtml5Compile.hxml

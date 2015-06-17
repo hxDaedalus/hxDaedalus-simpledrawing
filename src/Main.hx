@@ -40,6 +40,8 @@ import TestGraphics;
 {
 
     var g : SimpleDrawingContext;
+    var testGraphic: TestGraphics;
+
 	#if luxe //
 	override function ready() {
 	#else // not luxe
@@ -66,12 +68,8 @@ import TestGraphics;
 	#end // not luxe
 
         createViewPort();
-        new TestGraphics( g );
+        testGraphic = new TestGraphics( g #if java, surface #end );
 
-
-        #if java
-            surface.repaint();
-        #end
         #if (flash || nme || openfl)
             Lib.current.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
         #end
@@ -85,7 +83,6 @@ import TestGraphics;
             addChild( viewSprite );
         #elseif java
             g = new SimpleDrawingContext(this);
-            surface.paintFunction = refreshGraphics2D;
         #elseif flambe
 			var canvas = new TargetCanvas();
             g = new SimpleDrawingContext( canvas );
@@ -99,9 +96,10 @@ import TestGraphics;
     }
 
     #if java
-    public function refreshGraphics2D( g_: java.awt.Graphics2D ){
-       g.graphics = g_;
-    }
+    /*public function paintFunction( g_: java.awt.Graphics2D ){
+        g.graphics = g_;
+        testGraphic.render();
+    }*/
     #end
 
     #if( flash || nme || openfl )

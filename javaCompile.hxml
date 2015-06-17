@@ -13,7 +13,7 @@
 -cmd cd binSwing/src/
 -cmd cd ../
 # run our application
-# -cmd java -jar *.jar
+-cmd java -jar *.jar
 
 #win
 # not yet implemented

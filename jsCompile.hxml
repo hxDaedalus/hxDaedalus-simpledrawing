@@ -2,13 +2,23 @@
 -cp src/
 -main Main
 -D canvasHeader=600:400:60:FFFFFF
--js webJS/Main.js
+-js webJS/main.js
 -D fdb
 # setting svg flag allows drawing to be done with svg.
 #-D svg
 #-D showVerticesIndices
 -debug
+
+--next
+-main WebJS
+-cp srcTemplates/
+-neko webJS/webjs.n
+--next
+-cmd cd webJS
+-cmd neko webjs.n
+-cmd rm -r webjs.n
+--next
 #mac
 #-cmd open webJS/Main.html
 #win
--cmd start webJS/Main.html
+-cmd start Main.html
