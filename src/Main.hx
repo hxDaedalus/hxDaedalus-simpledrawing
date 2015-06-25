@@ -24,6 +24,8 @@ import TestGraphics;
     import flambe.System;
 #elseif js
     import hxDaedalus.canvas.BasicCanvas;
+#elseif format
+    import hxDaedalus.graphics.pixel.BasicPixel;
 #end
 
 #if (flash || nme || openfl)
@@ -34,7 +36,7 @@ import TestGraphics;
     class Main extends Game
 #elseif flambe
     class Main extends Component
-#elseif js
+#elseif (js || format)
     class Main
 #end
 {
@@ -53,16 +55,16 @@ import TestGraphics;
         #elseif flambe
             System.init();
             new Main();
-        #elseif (java || js)
+        #elseif (java || js || format )
             new Main();
         #end
     }
 
     public function new()
     {
-        #if (flash || nme || openfl || java || flambe )
+        #if ( flash || nme || openfl || java || flambe )
             super();
-        #elseif js
+        #elseif ( js || format )
         #end
 
 	#end // not luxe
@@ -90,7 +92,7 @@ import TestGraphics;
             .add(new FillSprite(0xffffff, System.stage.width, System.stage.height).setXY(0, 0))
             .add(this));
             background.addChild( new Entity().add( canvas ) );
-        #elseif ( js || luxe )
+        #elseif ( js || luxe || format )
             g = new SimpleDrawingContext( new TargetCanvas() );
         #end
     }

@@ -1,7 +1,7 @@
 package;
 
 import hxDaedalus.graphics.SimpleDrawingContext;
-
+import hxDaedalus.graphics.Pixels;
 class TestGraphics{
 
     var g: SimpleDrawingContext;
@@ -15,6 +15,10 @@ class TestGraphics{
             }
         #else
             draw();
+        #end
+
+        #if format
+            writeModifiedPNG( cast(g, BasicPixels).pixels, 'shapes' );
         #end
     }
 
@@ -54,4 +58,22 @@ class TestGraphics{
 
     }
 
+    #if format
+    public function writeModifiedPNG(pixels:Pixels, fileName:String) {
+        #if neko
+        var dir = Path.directory(neko.vm.Module.local().name);
+        #else
+        var dir = Path.directory(Sys.executablePath());
+        #end
+        var outputFileName = "out_" + fileName + ".png";
+        var file = sys.io.File.write(Path.join([dir, outputFileName]), true);
+        var pngWriter = new format.png.Writer(file);
+        startTime = Timer.stamp();
+        pixels.convertTo(PixelFormat.ARGB);
+        trace('convert ${Timer.stamp() - startTime}');
+        var pngData = format.png.Tools.build32ARGB(pixels.width, pixels.height, pixels.bytes);
+        pngWriter.write(pngData);
+        trace("written to '" + outputFileName + "'\n");
+    }
+    #end
 }
