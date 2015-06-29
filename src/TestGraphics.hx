@@ -21,11 +21,19 @@ class TestGraphics{
         #end
 
         #if format
-            writeModifiedPNG( cast( g, BasicPixel ).pixels, 'shapes' );
+            var basicPixel: BasicPixel = cast g.graphics;
+
+            writeModifiedPNG( basicPixel.pixels, 'shapes' );
         #end
     }
 
     inline private function draw(){
+
+        trace( 'draw white background ');
+        g.beginFill( 0xffffff, 1 );
+        g.lineStyle(1,0xff0000,1);
+        g.drawRect(0,0,1024,768);
+        g.endFill();
 
         trace( 'draw red circle with a blue outline' );
         g.beginFill( 0xff0000, 1 );

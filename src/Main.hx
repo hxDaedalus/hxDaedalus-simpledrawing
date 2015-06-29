@@ -55,7 +55,7 @@ import TestGraphics;
         #elseif flambe
             System.init();
             new Main();
-        #elseif (java || js || format )
+        #elseif ( java || js || format )
             new Main();
         #end
     }
@@ -70,6 +70,7 @@ import TestGraphics;
 	#end // not luxe
 
         createViewPort();
+        trace('g' );
         testGraphic = new TestGraphics( g #if java, surface #end );
 
         #if (flash || nme || openfl)
@@ -93,7 +94,8 @@ import TestGraphics;
             .add(this));
             background.addChild( new Entity().add( canvas ) );
         #elseif ( js || luxe || format )
-            g = new SimpleDrawingContext( new TargetCanvas() );
+            trace( ' format ');
+            g = new SimpleDrawingContext( new TargetCanvas( 1024, 768 ) );
         #end
     }
 
