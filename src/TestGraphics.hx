@@ -1,15 +1,16 @@
 package;
 
-import hxDaedalus.graphics.SimpleDrawingContext;
-import hxDaedalus.graphics.Pixels;
+import wings.core.SimpleDrawingContext;
+import wings.pixel.TPixels;
+import hxPixels.Pixels;
 #if format
-import hxDaedalus.graphics.pixel.BasicPixel;
+import wings.pixel.BasicPixel;
 #end
 class TestGraphics{
 
     var g: SimpleDrawingContext;
 
-    public function new( g_: SimpleDrawingContext #if java, surface: hxDaedalus.swing.Surface #end ){
+    public function new( g_: SimpleDrawingContext #if java, surface: wings.javaSwing.Surface #end ){
         g = g_;
         #if java
             surface.paintFunction =  function( g2D: java.awt.Graphics2D ){
@@ -28,12 +29,14 @@ class TestGraphics{
     }
 
     inline private function draw(){
-
+        // white bg still resolve some aspects for some targets.
+        #if ( !java && !luxe )
         trace( 'draw white background ');
         g.beginFill( 0xffffff, 1 );
         g.lineStyle(1,0xff0000,1);
         g.drawRect(0,0,1024,768);
         g.endFill();
+        #end
 
         trace( 'draw red circle with a blue outline' );
         g.beginFill( 0xff0000, 1 );
@@ -70,7 +73,7 @@ class TestGraphics{
     }
 
     #if format
-    public function writeModifiedPNG(pixels:Pixels, fileName:String) {
+    public function writeModifiedPNG(pixels:TPixels, fileName:String) {
         #if neko
         var dir = haxe.io.Path.directory(neko.vm.Module.local().name);
         #else

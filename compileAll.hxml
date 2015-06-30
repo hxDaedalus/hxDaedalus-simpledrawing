@@ -1,4 +1,6 @@
+-cmd haxe formatCompile.hxml
 # flambe has errors!!
+#--next
 #-cmd haxe flambeHtml5Compile.hxml
 --next
 -cmd haxe nmeWindowsCompile.hxml

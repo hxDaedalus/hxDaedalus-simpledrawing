@@ -1,7 +1,7 @@
 package;
 
-import hxDaedalus.graphics.SimpleDrawingContext;
-import hxDaedalus.graphics.TargetCanvas;
+import wings.core.SimpleDrawingContext;
+import wings.core.TargetCanvas;
 import TestGraphics;
 
 #if (flash || nme || openfl)
@@ -10,7 +10,7 @@ import TestGraphics;
     import flash.events.Event;
     import flash.events.KeyboardEvent;
 #elseif java
-    import hxDaedalus.swing.BasicSwing;
+    import wings.javaSwing.BasicSwing;
     import java.awt.Graphics2D;
     import haxe.Timer;
 #elseif luxe
@@ -23,9 +23,9 @@ import TestGraphics;
     import flambe.Entity;
     import flambe.System;
 #elseif js
-    import hxDaedalus.canvas.BasicCanvas;
+    import wings.jsCanvas.BasicCanvas;
 #elseif format
-    import hxDaedalus.graphics.pixel.BasicPixel;
+    import wings.pixel.BasicPixel;
 #end
 
 #if (flash || nme || openfl)
@@ -93,7 +93,9 @@ import TestGraphics;
             .add(new FillSprite(0xffffff, System.stage.width, System.stage.height).setXY(0, 0))
             .add(this));
             background.addChild( new Entity().add( canvas ) );
-        #elseif ( js || luxe || format )
+        #elseif ( luxe || svg || js )
+            g = new SimpleDrawingContext( new TargetCanvas() );
+        #elseif ( format )
             trace( ' format ');
             g = new SimpleDrawingContext( new TargetCanvas( 1024, 768 ) );
         #end
