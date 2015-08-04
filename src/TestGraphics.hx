@@ -1,12 +1,16 @@
 package;
 
-import hxDaedalus.graphics.SimpleDrawingContext;
-
+import wings.core.SimpleDrawingContext;
+import wings.pixel.TPixels;
+import hxPixels.Pixels;
+#if format
+import wings.pixel.BasicPixel;
+#end
 class TestGraphics{
 
     var g: SimpleDrawingContext;
 
-    public function new( g_: SimpleDrawingContext #if java, surface: hxDaedalus.swing.Surface #end ){
+    public function new( g_: SimpleDrawingContext #if java, surface: wings.javaSwing.Surface #end ){
         g = g_;
         #if java
             surface.paintFunction =  function( g2D: java.awt.Graphics2D ){
@@ -16,9 +20,23 @@ class TestGraphics{
         #else
             draw();
         #end
+
+        #if format
+            var basicPixel: BasicPixel = cast g.graphics;
+
+            writeModifiedPNG( basicPixel.pixels, 'shapes' );
+        #end
     }
 
     inline private function draw(){
+        // white bg still resolve some aspects for some targets.
+        #if ( !java && !luxe )
+        trace( 'draw white background ');
+        g.beginFill( 0xffffff, 1 );
+        g.lineStyle(1,0xff0000,1);
+        g.drawRect(0,0,1024,768);
+        g.endFill();
+        #end
 
         trace( 'draw red circle with a blue outline' );
         g.beginFill( 0xff0000, 1 );
@@ -54,4 +72,22 @@ class TestGraphics{
 
     }
 
+    #if format
+    public function writeModifiedPNG(pixels:TPixels, fileName:String) {
+        #if neko
+        var dir = haxe.io.Path.directory(neko.vm.Module.local().name);
+        #else
+        var dir = haxe.io.Path.directory(Sys.executablePath());
+        #end
+        var outputFileName = "out_" + fileName + ".png";
+        var file = sys.io.File.write(haxe.io.Path.join([dir, outputFileName]), true);
+        var pngWriter = new format.png.Writer(file);
+        var startTime = haxe.Timer.stamp();
+        pixels.convertTo(PixelFormat.ARGB);
+        trace('convert ${haxe.Timer.stamp() - startTime}');
+        var pngData = format.png.Tools.build32ARGB(pixels.width, pixels.height, pixels.bytes);
+        pngWriter.write(pngData);
+        trace("written to '" + outputFileName + "'\n");
+    }
+    #end
 }

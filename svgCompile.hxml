@@ -1,5 +1,6 @@
 # very similar to jsCompile
 -lib hxDaedalus
+-lib hxPixels
 -cp src/
 -main Main
 -D canvasHeader=600:400:60:FFFFFF

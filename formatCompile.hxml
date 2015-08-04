@@ -1,0 +1,9 @@
+-lib hxDaedalus
+-lib format
+-lib hxPixels
+-cp src/
+-main Main
+-debug
+-x binFormat/neko/main
+-D format
+-D Sys

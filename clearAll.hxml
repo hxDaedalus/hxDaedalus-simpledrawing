@@ -3,3 +3,4 @@
 -cmd rm -rf webJS
 -cmd rm -rf binSwing
 -cmd rm -rf webSVG
+-cmd rm -rf binFormat

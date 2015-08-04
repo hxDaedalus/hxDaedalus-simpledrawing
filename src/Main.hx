@@ -1,7 +1,7 @@
 package;
 
-import hxDaedalus.graphics.SimpleDrawingContext;
-import hxDaedalus.graphics.TargetCanvas;
+import wings.core.SimpleDrawingContext;
+import wings.core.TargetCanvas;
 import TestGraphics;
 
 #if (flash || nme || openfl)
@@ -10,7 +10,7 @@ import TestGraphics;
     import flash.events.Event;
     import flash.events.KeyboardEvent;
 #elseif java
-    import hxDaedalus.swing.BasicSwing;
+    import wings.javaSwing.BasicSwing;
     import java.awt.Graphics2D;
     import haxe.Timer;
 #elseif luxe
@@ -23,7 +23,9 @@ import TestGraphics;
     import flambe.Entity;
     import flambe.System;
 #elseif js
-    import hxDaedalus.canvas.BasicCanvas;
+    import wings.jsCanvas.BasicCanvas;
+#elseif format
+    import wings.pixel.BasicPixel;
 #end
 
 #if (flash || nme || openfl)
@@ -34,7 +36,7 @@ import TestGraphics;
     class Main extends Game
 #elseif flambe
     class Main extends Component
-#elseif js
+#elseif (js || format)
     class Main
 #end
 {
@@ -53,21 +55,22 @@ import TestGraphics;
         #elseif flambe
             System.init();
             new Main();
-        #elseif (java || js)
+        #elseif ( java || js || format )
             new Main();
         #end
     }
 
     public function new()
     {
-        #if (flash || nme || openfl || java || flambe )
+        #if ( flash || nme || openfl || java || flambe )
             super();
-        #elseif js
+        #elseif ( js || format )
         #end
 
 	#end // not luxe
 
         createViewPort();
+        trace('g' );
         testGraphic = new TestGraphics( g #if java, surface #end );
 
         #if (flash || nme || openfl)
@@ -90,8 +93,11 @@ import TestGraphics;
             .add(new FillSprite(0xffffff, System.stage.width, System.stage.height).setXY(0, 0))
             .add(this));
             background.addChild( new Entity().add( canvas ) );
-        #elseif ( js || luxe )
+        #elseif ( luxe || svg || js )
             g = new SimpleDrawingContext( new TargetCanvas() );
+        #elseif ( format )
+            trace( ' format ');
+            g = new SimpleDrawingContext( new TargetCanvas( 1024, 768 ) );
         #end
     }
 
